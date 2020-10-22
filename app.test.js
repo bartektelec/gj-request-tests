@@ -10,6 +10,7 @@ describe('test axios instance', () => {
     mock.onGet('/next?q=error').reply(200, data);
     const response = await request('/next?q=error');
     expect(response.data).toEqual(data);
+    expect(response.status).toEqual(200);
   });
   // - możesz obsłużyć błąd typu 500 oraz 404
   it('should handle http status 500 and 404 errors', async () => {
@@ -47,7 +48,7 @@ describe('test axios instance', () => {
       uploadedFiles.push(config.data);
       return [200, successData];
     });
-    
+
     // add file 1
     await request('/uploadfile', { method: 'POST', data: file1 });
     expect(uploadedFiles).toHaveLength(1);

@@ -3,6 +3,9 @@
     "js",
     "mjs"
   ],
+  "watchPathIgnorePatterns": [
+    "<rootDir>/node_modules"
+  ],
   "transform": {
     "^.+\\.js$": "babel-jest",
     "^.+\\.mjs$": "babel-jest"
