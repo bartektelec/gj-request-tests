@@ -33,8 +33,13 @@ describe('test axios instance', () => {
   // - możesz wysłać plik na POST /file
   it('should handle file upload to POST /file', async () => {
     const successData = { msg: 'Success' };
-    const file1 = 'niceFamilyPicture.jpg';
-    const file2 = 'dopeTrack.mp3';
+
+    const file1 = new File(["abcdf"], 'message.txt', {
+      type: 'text/plain'
+    })
+    const file2 = new File(["zxcvb"], 'dopeSong.mp3', {
+      type: 'audio/mpeg'
+    })
     const uploadedFiles = [];
 
     mock.onPost('/uploadfile').reply(config => {
@@ -42,6 +47,7 @@ describe('test axios instance', () => {
       uploadedFiles.push(config.data);
       return [200, successData];
     });
+    
     // add file 1
     await request('/uploadfile', { method: 'POST', data: file1 });
     expect(uploadedFiles).toHaveLength(1);
